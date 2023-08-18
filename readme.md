@@ -15,25 +15,27 @@ Data was scraped from <a href="https://github.com/logpai/loghub/blob/master/Wind
 
 #### Data Ingestion Architecture
 <img src="readme_images/ingestion-architecture.png">
-<br>
 
-### WORK FLOW FOR DATA INGESTION (Does not include logic to handle onlyfresh data)
+#### WORK FLOW FOR DATA INGESTION (Does not include logic to handle fresh data)
 1. Airflow was used due to its  extensive monitoring tool and its error handling methods.<br>
     - To achieve data ingestion, three tasks were created using python to extract the data, transform the data, and load into bigquery for analysis.
-    - It was set up locally in a docker container and executed through docker compose yml file. Dags can be viewed <a href="https://github.com/priye-1/Server_report_data_pipeline/tree/master/dags">here </a> <br>Hosting on Google Compose or Compute engine is advised for a production environment.
+    - Tasks on airflow run per shedule defined in 'default_args'
+    - It was set up locally in a docker container and executed through docker compose commands. Dags can be viewed <a href="https://github.com/priye-1/Server_report_data_pipeline/tree/master/dags">here </a> <br>Hosting on Google Compose or Compute engine is advised for a production environment.
+    - Upon task competion or Failure Airflow sends mail to stakeholder
 <img src='readme_images/airflow-dag.png'><br><br>
+Email from airflow: <br><img src='readme_images/email.png'><br><br>
 
 2. Bigquery was set up on the Google Cloud Platform for data entry. A project and dataset was created using the GCP console while a table was created and data was inserted using Bigquery Python's API. A helper class was also created for reproducibility and to handle all Bigquery operations. Find data class <a href="https://github.com/priye-1/Server_report_data_pipeline/blob/master/dags/helpers/bigquery_helper.py">here<br>
 Data exported from Bigquery can be found <a href="https://docs.google.com/spreadsheets/d/1H4FiiJb9ydCecGrk77mJxmU0Z5znKA45QOGmgJXxpYI/edit#gid=2097998581">here<br>
 <img src='readme_images/bigquery.png'><br>
 
 
-3. Streamlit was set up locally to display Data analyzed from bigquery. Code to show how many times each event_flag occured can be found <a href="https://github.com/priye-1/Server_report_data_pipeline/blob/master/query_analysis.py">here</a><br><br>
+3. Streamlit was locally set up independently to display Data analyzed from bigquery. Code to show how many times each event_flag occured can be found <a href="https://github.com/priye-1/Server_report_data_pipeline/blob/master/query_analysis.py">here</a><br><br>
 <img src='readme_images/streamlit.png'><br>
 <br>
 
 
-#### Proposed Architecture to Handle only Fresh runs
+#### Proposed Architecture to Handle only Fresh Data
 <img src="readme_images/fresh-data-architecture.png">
 <br>
 

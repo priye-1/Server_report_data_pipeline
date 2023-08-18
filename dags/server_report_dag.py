@@ -24,7 +24,7 @@ default_args = {
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
-    'schedule_interval': None,
+    'schedule_interval': '@daily',
     'retry_delay': timedelta(seconds=20)
 }
 

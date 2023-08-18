@@ -7,17 +7,6 @@ sudo yum install docker
 # install docker compose
 sudo apt-get install docker-compose-plugin
 
-# start docker service
-sudo service docker start
-
-# Add the ec2-user to the docker group so you can execute Docker commands without using sudo
-sudo usermod -a -G docker ec2-user
-
-# confirm docker is running
-sudo service docker status
-
-#Verify that the ec2-user can run Docker commands without sudo
-docker info
 
 # get airflow docker compose file
 curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.6.3/docker-compose.yaml'
@@ -27,6 +16,7 @@ docker compose up airflow-init
 
 # start all docker services
 docker compose up
+
 
 
 ################################################################### Setting up bigquery ##################################################################################
