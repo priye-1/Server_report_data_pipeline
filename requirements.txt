@@ -1,0 +1,5 @@
+apache-airflow[google]
+pyarrow==10.0.1
+pandas
+google-cloud-bigquery
+apache-airflow-providers-google
