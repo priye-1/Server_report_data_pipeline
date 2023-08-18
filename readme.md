@@ -3,7 +3,7 @@
 ### Technologies used
 - <b>Apache Airflow</b>: Apache Airflow is an open-source platform for authoring, scheduling and monitoring data and computing workflows. For this project it was used to manage data extraction and transformation process<br><br>
 - <b>Google Bigquery</b>: This is a cloud-based data warehousing platform for data storage and analytics purpose. For this project it was used to store transformed data for analysis<br><br>
-- <b>Google Cloud Function</b>: This is Google's serverless compute solution for creating event-driven applications. For this project, it is to be used to trigger DAG run by running based on a schedule.<br><br>
+- <b>Google Cloud Function</b>: This is Google's serverless compute solution for creating event-driven applications. For this project, it is to be used to trigger DAG by running based on a schedule.<br><br>
 - <b>Pandas</b> : This is a flexible and easy to use open source data analysis and manipulation tool, built on top of the Python programming language. For this project it was used to transform data scraped<br><br>
 - <b>Google Cloud Storage</b>: This is a highly scalable object storage service that stores data as objects within buckets. It is commonly used to store and distribute large media files, data backups and static website files. For this project it is used to store data scraped from target website. <br><br>
 - <b>Streamlit</b>:Streamlit is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science. For this project it was used to display data analysed from bigquery <br><br>
@@ -20,7 +20,7 @@ Data was scraped from <a href="https://github.com/logpai/loghub/blob/master/Wind
 1. Airflow was used due to its  extensive monitoring tool and its error handling methods.<br>
     - To achieve data ingestion, three tasks were created using python to extract the data, transform the data, and load into bigquery for analysis.
     - Tasks on airflow run per shedule defined in 'default_args'
-    - It was set up locally in a docker container and executed through docker compose commands. Dags can be viewed <a href="https://github.com/priye-1/Server_report_data_pipeline/tree/master/dags">here </a> <br>Hosting on Google Compose or Compute engine is advised for a production environment.
+    - It was set up locally in a docker container and executed through docker compose commands. Dags can be viewed <a href="https://github.com/priye-1/Server_report_data_pipeline/tree/master/dags">here </a> <br>Hosting Airflow on Google Compose or Compute engine is advised for a production environment.
     - Upon task competion or Failure Airflow sends mail to stakeholder
 <img src='readme_images/airflow-dag.png'><br><br>
 Email from airflow: <br><img src='readme_images/email.png'><br><br>
@@ -46,7 +46,7 @@ Data exported from Bigquery can be found <a href="https://docs.google.com/spread
 - Google Cloud Function then triggers airflow DAG to run 
 - Airflow extracts latest data from GCS, transforms data, and loads into Bigquery.
 - For subsequest runs, google cloud function is triggered
-- The Function Picks the last file saved in GCS and extracts the timestamp from name, saved as 'latest_timestamp'
+- The function picks the last file saved in GCS and extracts the timestamp from name, saved as 'latest_timestamp'
 - It then passes 'latest_timestamp' as a parameter to the API call, hence the API call is restricted to extract data with timestamp higher than 'latest_timestamp'
 - if timestamp parameter is not available for API get request, Data can be extracted first and then filtered  based on rows with timestamp higher than 'latest_timestamp'
 <br>
