@@ -47,7 +47,7 @@ def main() -> NoReturn:
     for row in results:
         data[row[0]] = row[1]
 
-    fig, ax = plt.subplots(facecolor='#C4D0B3', figsize=(8, 8))
+    fig, ax = plt.subplots(facecolor='#C4D0B3', figsize=(8, 6))
     ax.bar(data.keys(), data.values(), color='#3D6303', align='center')
 
     # Customize the chart

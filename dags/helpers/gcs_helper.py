@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from typing import NoReturn, union
+from typing import NoReturn
 from google.cloud import storage
 
 
@@ -8,13 +8,13 @@ class GoogleCloudStorageManager:
         self.storage_client = storage.Client(project=PROJECT_ID)
         self.BUCKET_NAME = BUCKET_NAME
 
-    def bucket_exists(self) -> union(None, str):
+    def bucket_exists(self) -> str:
         """To check if bucket exists
 
         Returns:
-            None | str
+            str
         """
-        return self.storage_client.lookup_bucket(self.BUCKET_NAME)
+        return self.storage_client.get_bucket(self.BUCKET_NAME)
 
     def create_bucket(self) -> object:
         """To create new bucket in google cloud storage

@@ -68,7 +68,7 @@ x-airflow-common:
     AIRFLOW__SMTP__SMTP_STARTTLS: "true"
     AIRFLOW__SMTP__SMTP_SSL: "false"
     AIRFLOW__SMTP__SMTP_USER: priyegeorge1st@gmail.com
-    AIRFLOW__SMTP__SMTP_PASSWORD: ***
+    AIRFLOW__SMTP__SMTP_PASSWORD: #######
     AIRFLOW__SMTP__SMTP_PORT: 587
     AIRFLOW__SMTP__SMTP_MAIL_FROM: airflow-task@test.com
     # yamllint disable rule:line-length

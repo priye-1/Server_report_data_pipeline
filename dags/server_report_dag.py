@@ -5,7 +5,6 @@ from pandas import DataFrame
 from typing import NoReturn
 from airflow import AirflowException
 from airflow.decorators import dag, task
-from typing import List
 from helpers.bigquery_helper import BigQueryDataManager
 from helpers.gcs_helper import GoogleCloudStorageManager
 from airflow.utils.email import send_email
@@ -13,6 +12,7 @@ from utils import (
     format_event_flag, format_event_message, format_event_time_and_date,
     get_message_list, get_log_data_list, make_request, get_max_timestamp
 )
+from google.cloud.exceptions import NotFound
 from helpers.constants import PROJECT_ID, DATASET_NAME, TABLE_NAME, BUCKET_NAME
 
 
@@ -49,9 +49,9 @@ def server_report_dag():
         file_name = f"{max_timestamp.strftime('%Y-%m-%d %H:%M:%S')}.csv"
 
         storage_cli = GoogleCloudStorageManager(PROJECT_ID, BUCKET_NAME)
-        if storage_cli.bucket_exists():
-            pass
-        else:
+        try:
+            storage_cli.bucket_exists()
+        except NotFound:
             storage_cli.create_bucket()
         storage_cli.insert_bucket(log_df_filtered, file_name)
 
