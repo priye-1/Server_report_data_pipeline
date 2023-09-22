@@ -14,8 +14,9 @@ curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.6.3/docker-compose.y
 # initialize database
 docker compose up airflow-init
 
-# start all docker services
-docker compose up
+# start all docker services and build image
+docker compose up --build
+
 
 
 
